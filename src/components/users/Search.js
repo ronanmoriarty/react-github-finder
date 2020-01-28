@@ -6,13 +6,24 @@ class Search extends Component {
     text: ''
   };
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  static propTypes = {
+    searchUsers: PropTypes.func.isRequired,
+    clearUsers: PropTypes.func.isRequired,
+    showClear: PropTypes.bool.isRequired,
+    setAlert: PropTypes.func.isRequired
+  };
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.searchUsers(this.state.text);
-    this.setState({ text: '' });
+    if (this.state.text === '') {
+      this.props.setAlert('Please enter something', 'light');
+    } else {
+      this.props.searchUsers(this.state.text);
+      this.setState({ text: '' });
+    }
   };
+
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
     const { showClear, clearUsers } = this.props;
@@ -42,11 +53,5 @@ class Search extends Component {
     );
   }
 }
-
-Search.propTypes = {
-  searchUsers: PropTypes.func.isRequired,
-  clearUsers: PropTypes.func.isRequired,
-  showClear: PropTypes.bool.isRequired
-};
 
 export default Search;
