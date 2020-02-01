@@ -177,6 +177,12 @@ img {
   margin: 3rem 0;
 }
 
+.github-profile {
+  width: 200px;
+  height: 50px;
+  text-align: center;
+}
+
 /* Grid */
 .grid-2 {
   display: grid;
